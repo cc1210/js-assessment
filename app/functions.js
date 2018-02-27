@@ -20,13 +20,15 @@ exports.functionsAnswers = {
   },
 
   makeClosures: function(arr, fn) {
-    function funcs (args) {
-      for (var i = 0; i < arr.length; i++) {
-        arguments[i] = fn(arr[i]);
+    function funcReturn () {
+      var array = [];
+      var args = Array.prototype.slice.call(arguments);
+      for (var i = 0; i < args.length; i++) {
+        array.push(fn.bind(null, args[i]));
       }
-      return arguments;
+      return array;
     }
-    return funcs;
+    return funcReturn.apply(null, arr);
   },
 
   partial: function(fn, str1, str2) {
@@ -49,10 +51,24 @@ exports.functionsAnswers = {
   },
 
   partialUsingArguments: function(fn) {
-
+    var args = Array.prototype.slice(arguments, 1);
+    return fn;
   },
 
   curryIt: function(fn) {
-
+    var array = [];
+    function curriedFuncFirstParam(param) {
+      array.push(param);
+      function curriedFuncSecondParam(param) {
+        array.push(param);
+        function curriedFuncThirdParam(param) {
+          array.push(param);
+          return fn.apply(null, array);
+        }
+        return curriedFuncThirdParam;
+      }
+      return curriedFuncSecondParam;
+    }
+    return curriedFuncFirstParam;
   }
 };
