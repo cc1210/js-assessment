@@ -36,16 +36,14 @@ exports.regexAnswers = {
   },
 
   matchesPattern: function(str) {
-    var re = new RegExp(/(\d\d\d)(?=-)(\d\d\d)(?=-)/);
-    var status = str.match(re);
-    if (str.match(re)) {
-      return true;
-    } else {
-      return false;
-    }
+    var re = new RegExp(/^\d\d\d-\d\d\d-\d\d\d\d$/);
+    return re.test(str);
   },
 
   isUSD: function(str) {
-
+    // var re = new RegExp(/^\$(\d{1,3},{0,1})\.\d{2}$/);
+    var re = new RegExp(/,/);
+    var status = str.match(re);
+    return status;
   }
 };
