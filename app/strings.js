@@ -2,20 +2,43 @@ exports = typeof window === 'undefined' ? global : window;
 
 exports.stringsAnswers = {
   reduceString: function(str, amount) {
+    var strArray = str.split('');
     var obj = {};
-    var strArray = [];
-    var newString = "";
-    for (var i = 0; i < str.length; i++) {
-      var letter = str[i];
-
-      if (count < amount && ) {
-
+    var reducedString = "";
+    function findConsecutiveLetters (sequence) {
+      var conseqArray = [];
+      var iterator = strArray.values();
+      var j = 0;
+      while (j < strArray.length) {
+        iterator.next().value;
       }
     }
-    for (var i = 0; i < strArray.length; i++) {
-
+    findConsecutiveLetters(str);
+    function addNTimes(amount, letter) {
+      i = 0;
+      while (i < amount) {
+        reducedString += letter;
+        i++;
+      }
     }
-    return str.length;
+    function subArrayManipulation(array, ind) {
+      array.forEach(function(element, index) {
+        if (obj[element + ind] === undefined) {
+          obj[element + ind] = [index];
+        } else {
+          obj[element + ind].push(index);
+        }
+      });
+    }
+    Object.keys(obj).forEach(function(key) {
+      if (obj[key].length > amount) {
+        addNTimes(amount, key);
+      } else {
+        reducedString += key;
+      }
+
+    });
+    return reducedString;
   },
 
   wordWrap: function(str, cols) {

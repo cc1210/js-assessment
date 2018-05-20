@@ -35,9 +35,34 @@ exports.recursionAnswers = {
   permute: function(arr) {
     var resultArray = [];
     var usedElements = [];
-    function startThePerm(elem) {
-      
+    var product = 1;
+    var counter = 0;
+
+    function factorial(subArr) {
+      if (subArr.length > 1) {
+        product *= subArr.length
+        subArr.pop();
+        factorial(subArr);
+      }
+      // return product;
     }
+
+    function arrangeArrs(elem) {
+      var ind = arr.indexOf(elem);
+      arr.splice(ind, 1);
+      factorial(arr);
+      var multiplication = product;
+      product = 1;
+      var newArray = [];
+      arr.map((elements) => {
+        newArray.push(elements);
+      });
+      resultArray.push(newArray);
+      arr.splice(ind, 0, elem);
+    }
+
+    arr.forEach(arrangeArrs);
+    return resultArray;
   },
 
   fibonacci: function(n) {
